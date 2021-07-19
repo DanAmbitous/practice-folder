@@ -8,31 +8,21 @@
   <title>Document</title>
 </head>
 <body>  
-  <div id="grand-parent">
-    <strong>Grand Parent</strong>
-    <div>
-      <strong>Parent 1</strong>
-      <div>
-        <strong>Child 1</strong>
-      </div>
-      <div>
-        <strong>Child 2</strong>
-      </div>
-    </div>
-    <div>
-      <strong>Parent 2</strong>
-    </div>
+  <div id="controllers">
+    <label for="add-item">Add item</label>
+    <input type="text" id="add-item">
+    <button id="add-item-button">Add Item</button>
+  </div>
+
+  <div id="list-container">
+    <ul id="list">
+
+    </ul>
   </div>
 
   <style>
-    div > div {
-      border-left: 1px solid gray;
-      padding-left: 5%;
-      margin-left: 0.5vw;
-    }
-
-    div {
-      color: black;
+    button {
+      cursor: pointer;
     }
   </style>
 </body>

@@ -1,13 +1,16 @@
-const grandparent = document.querySelector("#grand-parent")
-const parentOne = grandparent.children[1]
+const list = document.querySelector("#list")
+const additionInput = document.querySelector("#add-item")
+const additionButton = document.querySelector("#add-item-button")
 
-parentOne.style.color = "blue"
-parentOne.nextElementSibling.style.color = "red"
+function additionFunctionality() {
+  const item = additionInput.value
 
-const parentTwo = grandparent.children[2]
+  const listElement = document.createElement("li")
+  listElement.textContent = item
+  list.append(listElement)
 
-console.log(parentOne, parentTwo)
+  additionInput.value = ""
+  additionInput.focus()
+}
 
-const childOfParentOne = parentOne.children[1]
-
-childOfParentOne.closest("#grand-parent").style.color = "green"
+additionButton.addEventListener("click", additionFunctionality)
