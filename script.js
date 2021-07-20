@@ -1,16 +1,19 @@
-const list = document.querySelector("#list")
-const additionInput = document.querySelector("#add-item")
-const additionButton = document.querySelector("#add-item-button")
+const openModalButton = document.querySelector("#open-modal-button")
+const closeModal = document.querySelector("#close-modal-button")
+const modal = document.querySelector("#modal")
+const overlay = document.querySelector("#overlay")
 
-function additionFunctionality() {
-  const item = additionInput.value
+openModalButton.addEventListener("click", (e) => {
+  modal.classList.add("open")
+  overlay.classList.add("open")
+})
 
-  const listElement = document.createElement("li")
-  listElement.textContent = item
-  list.append(listElement)
+closeModal.addEventListener("click", (e) => {
+  modal.classList.remove("open")
+  overlay.classList.remove("open")
+})
 
-  additionInput.value = ""
-  additionInput.focus()
-}
-
-additionButton.addEventListener("click", additionFunctionality)
+overlay.addEventListener("click", (e) => {
+  modal.classList.remove("open")
+  overlay.classList.remove("open")
+})

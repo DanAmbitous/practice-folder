@@ -8,20 +8,56 @@
   <title>Document</title>
 </head>
 <body>  
-  <div id="controllers">
-    <label for="add-item">Add item</label>
-    <input type="text" id="add-item">
-    <button id="add-item-button">Add Item</button>
-  </div>
+  <div id="overlay"></div>
 
-  <div id="list-container">
-    <ul id="list">
+  <button id="open-modal-button">Open Modal</button>
 
-    </ul>
+  <div id="modal">
+    <h3>This is the modal</h3>
+    <button id="close-modal-button">Close Modal</button>
   </div>
 
   <style>
-    button {
+    #modal.open {
+      display: flex;
+    }
+
+    #overlay.open {
+      display: block;
+    }
+
+    #overlay {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, .75);
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      justify-content: center;
+    }
+
+    #modal {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 1px solid black;
+      padding: 1rem;
+      border-radius: 1rem;
+      background-color: white;
+    }
+
+    #open-modal-button, #modal > button {
       cursor: pointer;
     }
   </style>
