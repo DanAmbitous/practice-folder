@@ -8,6 +8,65 @@
   <title>Document</title>
 </head>
 <body>  
+  <div class="piano">
+    <div data-note="C" class="key white"></div>
+    <div data-note="Db" class="key black"></div>
+    <div data-note="D" class="key white"></div>
+    <div data-note="Eb" class="key black"></div>
+    <div data-note="E" class="key white"></div>
+    <div data-note="F" class="key white"></div>
+    <div data-note="Gb" class="key black"></div>
+    <div data-note="G" class="key white"></div>
+    <div data-note="Ab" class="key black"></div>
+    <div data-note="A" class="key white"></div>
+    <div data-note="Bb" class="key black"></div>
+    <div data-note="B" class="key white"></div>
+  </div>
 
+  <style>
+    *, *::before, *::after {
+    box-sizing: border-box;
+    }
+
+    body {
+    background-color: #143F6B;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+    .piano {
+    display: flex;
+    }
+
+    .key {
+    height: calc(var(--width) * 4);
+    width: var(--width);
+    }
+
+    .white {
+    --width: 100px;
+    background-color: white;
+    border: 1px solid #333;
+    }
+
+    .white.active {
+    background-color: #CCC;
+    }
+
+    .black {
+    --width: 60px;
+    background-color: black;
+    margin-left: calc(var(--width) / -2);
+    margin-right: calc(var(--width) / -2);
+    z-index: 2;
+    }
+
+    .black.active {
+    background-color: #333;
+    }
+  </style>
 </body>
 </html>
