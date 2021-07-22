@@ -12,11 +12,12 @@
 
 const formElement = document.querySelector("#form")
 const errorList = document.querySelector(".errors-list")
+const errorContainer = document.querySelector(".errors")
 const inputElements = document.querySelectorAll(".form-group")
 const usernameInput = inputElements[0].children[1]
 const passwordInput = inputElements[1].children[1]
 const passwordConfirmationInput = inputElements[2].children[1]
-const termsAgreement = inputElements[3]
+const termsAgreement = document.querySelector("#terms")
 
 document.addEventListener("submit", (e) => {
   const errorMessages = []
@@ -33,7 +34,9 @@ document.addEventListener("submit", (e) => {
     errorMessages.push("Your password has to be at least 10 characters long")
   }
 
-  if (passwordConfirmationInput !== passwordInput) {
+  if (passwordConfirmationInput.value !== passwordInput.value) {
+    console.log(passwordInput.value, passwordConfirmationInput.value)
+
     e.preventDefault()
 
     errorMessages.push(
@@ -41,17 +44,30 @@ document.addEventListener("submit", (e) => {
     )
   }
 
+  console.log(termsAgreement.checked)
+
   if (!termsAgreement.checked) {
     e.preventDefault()
 
     errorMessages.push("You need to accept the Terms and Conditions")
   }
 
-  console.log(errorMessages)
+  clearErrors()
+  showErrors(errorMessages)
 })
 
 // TODO: Define this function
 function clearErrors() {
+  let numberOfErrorMessages = errorList.children.length
+
+  while (numberOfErrorMessages > 0) {
+    errorList.children[numberOfErrorMessages - 1].remove()
+
+    numberOfErrorMessages--
+  }
+
+  errorContainer.classList.remove("show")
+
   // Loop through all the children of the error-list element and remove them
   // IMPORTANT: This cannot be done with a forEach loop or a normal for loop since as you remove children it will modify the list you are looping over which will not work
   // I recommend using a while loop to accomplish this task
@@ -61,6 +77,15 @@ function clearErrors() {
 
 // TODO: Define this function
 function showErrors(errorMessages) {
+  errorMessages.forEach((errorMessage) => {
+    const errorMessageElement = document.createElement("li")
+    errorMessageElement.textContent = errorMessage
+
+    errorList.append(errorMessageElement)
+  })
+
+  errorContainer.classList.add("show")
+
   // Add each error to the error-list element
   // Make sure to use an li as the element for each error
   // Also, make sure you add the show class to the errors container
