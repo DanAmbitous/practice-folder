@@ -8,64 +8,152 @@
   <title>Document</title>
 </head>
 <body>  
-  <div class="piano">
-    <div data-note="C" class="key white"></div>
-    <div data-note="Db" class="key black"></div>
-    <div data-note="D" class="key white"></div>
-    <div data-note="Eb" class="key black"></div>
-    <div data-note="E" class="key white"></div>
-    <div data-note="F" class="key white"></div>
-    <div data-note="Gb" class="key black"></div>
-    <div data-note="G" class="key white"></div>
-    <div data-note="Ab" class="key black"></div>
-    <div data-note="A" class="key white"></div>
-    <div data-note="Bb" class="key black"></div>
-    <div data-note="B" class="key white"></div>
+  <div id="alert">
+    <div class="alert-title">Congratulations!!</div>
+    You got them all right!
   </div>
+  <form id="quiz-form">
+    <ol>
+      <li class="question-item">
+        <div>What does this code return? (<code>0 || '' || false || "Hi"</code>)</div>
+        <div>
+          <ol>
+            <li class="answer-item">
+              <label>
+                <input class="answer" type="radio" name="answer-1" value="false">
+                <code>0</code>
+              </label>
+            </li>
+            <li class="answer-item">
+              <label>
+                <input class="answer" type="radio" name="answer-1" value="true">
+                <code>"Hi"</code>
+              </label>
+            </li>
+            <li class="answer-item">
+              <label>
+                <input class="answer" type="radio" name="answer-1" value="false">
+                <code>false</code>
+              </label>
+            </li>
+            <li class="answer-item">
+              <label>
+                <input class="answer" type="radio" name="answer-1" value="false">
+                <code>''</code>
+              </label>
+            </li>
+          </ol>
+        </div>
+      </li>
+      <li class="question-item">
+        <div>What is it called when a function calls itself?</div>
+        <div>
+          <ol>
+            <li class="answer-item">
+              <label>
+                <input class="answer" type="radio" name="answer-2" value="false">
+                Inception
+              </label>
+            </li>
+            <li class="answer-item">
+              <label>
+                <input class="answer" type="radio" name="answer-2" value="false">
+                Self-Referential
+              </label>
+            </li>
+            <li class="answer-item">
+              <label>
+                <input class="answer" type="radio" name="answer-2" value="true">
+                Recursion
+              </label>
+            </li>
+            <li class="answer-item">
+              <label>
+                <input class="answer" type="radio" name="answer-2" value="false">
+                Who Cares
+              </label>
+            </li>
+          </ol>
+        </div>
+      </li>
+      <li class="question-item">
+        <div>How do you access the value of the <code>data-count</code> data attribute in JavaScript?</div>
+        <div>
+          <ol>
+            <li class="answer-item">
+              <label>
+                <input class="answer" type="radio" name="answer-3" value="true">
+                <code>element.dataset.count</code>
+              </label>
+            </li>
+            <li class="answer-item">
+              <label>
+                <input class="answer" type="radio" name="answer-3" value="false">
+                <code>element.dataAttribute.count</code>
+              </label>
+            </li>
+            <li class="answer-item">
+              <label>
+                <input class="answer" type="radio" name="answer-3" value="false">
+                <code>element.dataset.dataCount</code>
+              </label>
+            </li>
+            <li class="answer-item">
+              <label>
+                <input class="answer" type="radio" name="answer-3" value="false">
+                <code>element.dataCount</code>
+              </label>
+            </li>
+          </ol>
+        </div>
+      </li>
+    </ol>
+    <button type="submit">Check</button>
+  </form>
 
   <style>
-    *, *::before, *::after {
-    box-sizing: border-box;
+    .answer-item {
+      list-style: lower-alpha;
     }
 
-    body {
-    background-color: #143F6B;
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    .question-item {
+      margin-bottom: 2rem;
     }
 
-    .piano {
-    display: flex;
+    .question-item.correct {
+      color: green;
     }
 
-    .key {
-    height: calc(var(--width) * 4);
-    width: var(--width);
+    .question-item.incorrect {
+      color: red;
     }
 
-    .white {
-    --width: 100px;
-    background-color: white;
-    border: 1px solid #333;
+    .question-item:last-child {
+      margin-bottom: 0;
     }
 
-    .white.active {
-    background-color: #CCC;
+    .alert-title {
+      font-weight: bold;
+      margin-bottom: .5rem;
+      font-size: 2rem;
     }
 
-    .black {
-    --width: 60px;
-    background-color: black;
-    margin-left: calc(var(--width) / -2);
-    margin-right: calc(var(--width) / -2);
-    z-index: 2;
+    #alert {
+      font-size: 1.25rem;
+      position: absolute;
+      display: none;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      padding: 1rem;
+      background-color: hsl(100, 80%, 80%);
+      border-radius: .5rem;
+      color: hsl(100, 80%, 20%);
     }
 
-    .black.active {
-    background-color: #333;
+    #alert.active {
+      display: block;
     }
   </style>
 </body>

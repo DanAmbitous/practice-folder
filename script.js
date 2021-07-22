@@ -1,77 +1,72 @@
-const audioContext = new AudioContext()
+/*
+  TODO: 2. Select all elements needed
+    * The form element (has the id `quiz-form`)
+    * The answer inputs (have the class `answer`)
+    * BONUS: The questions (have the class `question-item`)
+    * BONUS: The alert (has the id `alert`)
+*/
 
-const NOTE_DETAILS = [
-  { note: "C", key: "Z", frequency: 261.626 },
-  { note: "Db", key: "S", frequency: 277.183 },
-  { note: "D", key: "X", frequency: 293.665 },
-  { note: "Eb", key: "D", frequency: 311.127 },
-  { note: "E", key: "C", frequency: 329.628 },
-  { note: "F", key: "V", frequency: 349.228 },
-  { note: "Gb", key: "G", frequency: 369.994 },
-  { note: "G", key: "B", frequency: 391.995 },
-  { note: "Ab", key: "H", frequency: 415.305 },
-  { note: "A", key: "N", frequency: 440 },
-  { note: "Bb", key: "J", frequency: 466.164 },
-  { note: "B", key: "M", frequency: 493.883 },
-]
+// TODO: 3. Create a submit event listener for the form that does the following.
+//    1. Prevent the default behaviour
+//    2. Get all selected answers (use the `checked` property on the input to determine if it is selected or not)
+//    3. Loop through the selected answer to see if they are correct or not (Check the value of the answer to see if it is the string "true")
+//    4. For each correct answer add the class `correct` to the parent with the class `question-item` and remove the class `incorrect`.
+//    5. For each incorrect answer add the class `incorrect` to the parent with the class `question-item` and remove the class `correct`.
+//    6. BONUS: Make sure unanswered questions show up as incorrect. The easiest way to do this is to add the incorrect class and removing the correct class from all question items before checking the correct answers
+//    7. BONUS: If all answers are correct show the element with the id `alert` and hide it after one second (look into setTimeout) (use the class active to show the alert and remove the class to hide it)
 
-document.addEventListener("keydown", (e) => {
-  if (e.repeat) return
+const formElement = document.querySelector("#quiz-form")
+let answerInputs = document.querySelectorAll(".answer")
+const questionElements = document.querySelectorAll(".question-item")
+const alertElement = document.querySelector("#alert")
 
-  const keyCode = e.code
-  const noteDetail = getNoteDetail(keyCode)
+document.addEventListener("submit", (e) => {
+  e.preventDefault()
 
-  if (noteDetail == null) return
+  //Adds incorrect to all answers' ancestor element for the unanswered questions
+  answerInputs.forEach((answerInput) =>
+    answerInput.closest(".question-item").classList.add("incorrect")
+  )
 
-  noteDetail.active = true
-  playNotes()
-})
+  //To store all of the answered questions
+  let checkedAnswers = []
 
-document.addEventListener("keyup", (e) => {
-  console.log("Key up")
-  console.log(e)
-
-  const keyCode = e.code
-  const noteDetail = getNoteDetail(keyCode)
-
-  if (noteDetail == null) return
-
-  noteDetail.active = false
-  playNotes()
-})
-
-//Get which key is being pressed on the keyboard corresponding to piano's
-function getNoteDetail(keyboardKey) {
-  return NOTE_DETAILS.find((note) => `Key${note.key}` === keyboardKey)
-}
-
-function playNotes() {
-  NOTE_DETAILS.forEach((note) => {
-    const keyElement = document.querySelector(`[data-note="${note.note}"]`)
-    console.log(note.active)
-    keyElement.classList.toggle("active", note.active || false)
-
-    if (note.oscillator != null) {
-      note.oscillator.stop()
-      note.oscillator.disconnect()
+  //To store to the array of checkedAnswers
+  answerInputs.forEach((answerInput) => {
+    if (answerInput.checked) {
+      checkedAnswers.push(answerInput)
     }
   })
 
-  const activeNotes = NOTE_DETAILS.filter((note) => note.active)
-  const gain = 1 / activeNotes.length
-  activeNotes.forEach((note) => {
-    playNote(note, gain)
+  //To store all of the correct answers selected by the user
+  let correctAnswers = []
+
+  //To check to see if the answered questions are correct
+  checkedAnswers.forEach((checkedAnswer) => {
+    if (checkedAnswer.value === "true") {
+      correctAnswers.push(checkedAnswer)
+
+      checkedAnswer.closest(".question-item").classList.remove("incorrect")
+      checkedAnswer.closest(".question-item").classList.add("correct")
+    }
   })
-}
 
-function playNote(noteDetail, gain) {
-  const gainNote = audioContext.createGain()
-  gainNote.gain.value = gain
-  const oscillator = audioContext.createOscillator()
-  oscillator.frequency.value = noteDetail.frequency
-  oscillator.type = "sine"
-  oscillator.connect(audioContext.destination)
-  oscillator.start()
+  //To store all of the corrects answers
+  let totalCorrectAnswers = []
 
-  noteDetail.oscillator = oscillator
-}
+  //To check to see if all of the answered questions are correct
+  answerInputs.forEach((answerInput) => {
+    if (answerInput.value === "true") {
+      totalCorrectAnswers.push(answerInput)
+    }
+  })
+
+  //Checks to see if all of the checked answers are correct to show a Congrats message to the user
+  if (correctAnswers.length === totalCorrectAnswers.length) {
+    alertElement.classList.add("active")
+
+    setTimeout(() => {
+      alertElement.classList.remove("active")
+    }, 1000)
+  }
+})
