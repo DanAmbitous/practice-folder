@@ -8,152 +8,74 @@
   <title>Document</title>
 </head>
 <body>  
-  <div id="alert">
-    <div class="alert-title">Congratulations!!</div>
-    You got them all right!
-  </div>
-  <form id="quiz-form">
-    <ol>
-      <li class="question-item">
-        <div>What does this code return? (<code>0 || '' || false || "Hi"</code>)</div>
-        <div>
-          <ol>
-            <li class="answer-item">
-              <label>
-                <input class="answer" type="radio" name="answer-1" value="false">
-                <code>0</code>
-              </label>
-            </li>
-            <li class="answer-item">
-              <label>
-                <input class="answer" type="radio" name="answer-1" value="true">
-                <code>"Hi"</code>
-              </label>
-            </li>
-            <li class="answer-item">
-              <label>
-                <input class="answer" type="radio" name="answer-1" value="false">
-                <code>false</code>
-              </label>
-            </li>
-            <li class="answer-item">
-              <label>
-                <input class="answer" type="radio" name="answer-1" value="false">
-                <code>''</code>
-              </label>
-            </li>
-          </ol>
-        </div>
-      </li>
-      <li class="question-item">
-        <div>What is it called when a function calls itself?</div>
-        <div>
-          <ol>
-            <li class="answer-item">
-              <label>
-                <input class="answer" type="radio" name="answer-2" value="false">
-                Inception
-              </label>
-            </li>
-            <li class="answer-item">
-              <label>
-                <input class="answer" type="radio" name="answer-2" value="false">
-                Self-Referential
-              </label>
-            </li>
-            <li class="answer-item">
-              <label>
-                <input class="answer" type="radio" name="answer-2" value="true">
-                Recursion
-              </label>
-            </li>
-            <li class="answer-item">
-              <label>
-                <input class="answer" type="radio" name="answer-2" value="false">
-                Who Cares
-              </label>
-            </li>
-          </ol>
-        </div>
-      </li>
-      <li class="question-item">
-        <div>How do you access the value of the <code>data-count</code> data attribute in JavaScript?</div>
-        <div>
-          <ol>
-            <li class="answer-item">
-              <label>
-                <input class="answer" type="radio" name="answer-3" value="true">
-                <code>element.dataset.count</code>
-              </label>
-            </li>
-            <li class="answer-item">
-              <label>
-                <input class="answer" type="radio" name="answer-3" value="false">
-                <code>element.dataAttribute.count</code>
-              </label>
-            </li>
-            <li class="answer-item">
-              <label>
-                <input class="answer" type="radio" name="answer-3" value="false">
-                <code>element.dataset.dataCount</code>
-              </label>
-            </li>
-            <li class="answer-item">
-              <label>
-                <input class="answer" type="radio" name="answer-3" value="false">
-                <code>element.dataCount</code>
-              </label>
-            </li>
-          </ol>
-        </div>
-      </li>
-    </ol>
-    <button type="submit">Check</button>
+  <form action="thank-you.html" id="form">
+    <div class="errors">
+      <h3 class="error-title">Error</h3>
+      <ul class="errors-list">
+      </ul>
+    </div>
+
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password">
+    </div>
+
+    <div class="form-group">
+      <label for="password-confirmation">Password Confirmation</label>
+      <input type="password" id="password-confirmation" name="password-confirmation">
+    </div>
+
+    <div class="form-group">
+      <label for="terms">
+        <input type="checkbox" id="terms" name="terms">
+        Agree To Terms?
+      </label>
+    </div>
+
+    <button type="submit">Create Account</button>
   </form>
 
   <style>
-    .answer-item {
-      list-style: lower-alpha;
-    }
-
-    .question-item {
-      margin-bottom: 2rem;
-    }
-
-    .question-item.correct {
-      color: green;
-    }
-
-    .question-item.incorrect {
-      color: red;
-    }
-
-    .question-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .alert-title {
-      font-weight: bold;
-      margin-bottom: .5rem;
-      font-size: 2rem;
-    }
-
-    #alert {
-      font-size: 1.25rem;
-      position: absolute;
+    .errors {
       display: none;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      padding: 1rem;
-      background-color: hsl(100, 80%, 80%);
-      border-radius: .5rem;
-      color: hsl(100, 80%, 20%);
     }
 
-    #alert.active {
+    .errors.show {
       display: block;
+    }
+
+    .errors {
+      background-color: hsl(0, 100%, 80%);
+      border-radius: .5rem;
+      padding: 10px;
+      color: hsl(0, 50%, 20%);
+      margin-bottom: 1rem;
+    }
+
+    #form {
+      margin: 1rem 0;
+    }
+
+    .error-title {
+      margin: 0;
+      margin-bottom: .5rem;
+    }
+
+    .errors-list {
+      margin: 0;
+      padding-left: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
     }
   </style>
 </body>

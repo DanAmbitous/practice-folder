@@ -1,72 +1,67 @@
-/*
-  TODO: 2. Select all elements needed
-    * The form element (has the id `quiz-form`)
-    * The answer inputs (have the class `answer`)
-    * BONUS: The questions (have the class `question-item`)
-    * BONUS: The alert (has the id `alert`)
-*/
+// TODO: Select all elements needed
+//    Use the HTML to figure out what classes/ids will work best for selecting each element
 
-// TODO: 3. Create a submit event listener for the form that does the following.
-//    1. Prevent the default behaviour
-//    2. Get all selected answers (use the `checked` property on the input to determine if it is selected or not)
-//    3. Loop through the selected answer to see if they are correct or not (Check the value of the answer to see if it is the string "true")
-//    4. For each correct answer add the class `correct` to the parent with the class `question-item` and remove the class `incorrect`.
-//    5. For each incorrect answer add the class `incorrect` to the parent with the class `question-item` and remove the class `correct`.
-//    6. BONUS: Make sure unanswered questions show up as incorrect. The easiest way to do this is to add the incorrect class and removing the correct class from all question items before checking the correct answers
-//    7. BONUS: If all answers are correct show the element with the id `alert` and hide it after one second (look into setTimeout) (use the class active to show the alert and remove the class to hide it)
+// TODO: Create an event listener for when the form is submitted and do the following inside of it.
+//    TODO: Create an array to store all error messages and clear any old error messages
+//    TODO: Define the following validation checks with appropriate error messages
+//      1. Ensure the username is at least 6 characters long
+//      2. Ensure the password is at least 10 characters long
+//      3. Ensure the password and confirmation password match
+//      4. Ensure the terms checkbox is checked
+//    TODO: If there are any errors then prevent the form from submitting and show the error messages
 
-const formElement = document.querySelector("#quiz-form")
-let answerInputs = document.querySelectorAll(".answer")
-const questionElements = document.querySelectorAll(".question-item")
-const alertElement = document.querySelector("#alert")
+const formElement = document.querySelector("#form")
+const errorList = document.querySelector(".errors-list")
+const inputElements = document.querySelectorAll(".form-group")
+const usernameInput = inputElements[0].children[1]
+const passwordInput = inputElements[1].children[1]
+const passwordConfirmationInput = inputElements[2].children[1]
+const termsAgreement = inputElements[3]
 
 document.addEventListener("submit", (e) => {
-  e.preventDefault()
+  const errorMessages = []
 
-  //Adds incorrect to all answers' ancestor element for the unanswered questions
-  answerInputs.forEach((answerInput) =>
-    answerInput.closest(".question-item").classList.add("incorrect")
-  )
+  if (usernameInput.value.length < 6) {
+    e.preventDefault()
 
-  //To store all of the answered questions
-  let checkedAnswers = []
-
-  //To store to the array of checkedAnswers
-  answerInputs.forEach((answerInput) => {
-    if (answerInput.checked) {
-      checkedAnswers.push(answerInput)
-    }
-  })
-
-  //To store all of the correct answers selected by the user
-  let correctAnswers = []
-
-  //To check to see if the answered questions are correct
-  checkedAnswers.forEach((checkedAnswer) => {
-    if (checkedAnswer.value === "true") {
-      correctAnswers.push(checkedAnswer)
-
-      checkedAnswer.closest(".question-item").classList.remove("incorrect")
-      checkedAnswer.closest(".question-item").classList.add("correct")
-    }
-  })
-
-  //To store all of the corrects answers
-  let totalCorrectAnswers = []
-
-  //To check to see if all of the answered questions are correct
-  answerInputs.forEach((answerInput) => {
-    if (answerInput.value === "true") {
-      totalCorrectAnswers.push(answerInput)
-    }
-  })
-
-  //Checks to see if all of the checked answers are correct to show a Congrats message to the user
-  if (correctAnswers.length === totalCorrectAnswers.length) {
-    alertElement.classList.add("active")
-
-    setTimeout(() => {
-      alertElement.classList.remove("active")
-    }, 1000)
+    errorMessages.push("Your username has to be at least 6 characters long")
   }
+
+  if (passwordInput.value.length < 10) {
+    e.preventDefault()
+
+    errorMessages.push("Your password has to be at least 10 characters long")
+  }
+
+  if (passwordConfirmationInput !== passwordInput) {
+    e.preventDefault()
+
+    errorMessages.push(
+      "Your password confirmation has to be same as the password"
+    )
+  }
+
+  if (!termsAgreement.checked) {
+    e.preventDefault()
+
+    errorMessages.push("You need to accept the Terms and Conditions")
+  }
+
+  console.log(errorMessages)
 })
+
+// TODO: Define this function
+function clearErrors() {
+  // Loop through all the children of the error-list element and remove them
+  // IMPORTANT: This cannot be done with a forEach loop or a normal for loop since as you remove children it will modify the list you are looping over which will not work
+  // I recommend using a while loop to accomplish this task
+  // This is the trickiest part of this exercise so if you get stuck and are unable to progress you can also set the innerHTML property of the error-list to an empty string and that will also clear the children. I recommend trying to accomplish this with a while loop, though, for practice.
+  // Also, make sure you remove the show class to the errors container
+}
+
+// TODO: Define this function
+function showErrors(errorMessages) {
+  // Add each error to the error-list element
+  // Make sure to use an li as the element for each error
+  // Also, make sure you add the show class to the errors container
+}
