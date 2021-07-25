@@ -1,84 +1,77 @@
-function getValueWithDelay(value, delay) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(value)
-    }, delay)
-  })
-}
+//*User interactable
+//add todos
+//user will type in todo
+//delete todos
+//able to mark todos complete or incomplete
 
-function getValueWithDelayError(value, delay) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      reject(
-        "De inmediato y con seguridad te brindamos un error para zanjar esta funcionalidad"
-      )
-    }, delay)
-  })
-}
+//saving todos
+//loading todos
 
-//Call getValueWithDelay twice and print out the returned value
-//Then call getValueWith Delayerror and make sure the error is well caught
+const todosListElement = document.querySelector("#list")
+const formElement = document.querySelector("#new-todo-form")
+const addItemButtonElement = document.querySelector("#add-button-element")
+const inputTodosElement = document.querySelector("#todo-input")
+const template = document.querySelector("#list-item-template")
+const LOCAL_STORAGE_PREFIX = "TODO_LIST"
+const TODOS_STORAGE_KEY = `${LOCAL_STORAGE_PREFIX}-todos`
+const todos = loadTodos()
+todos.forEach(renderTodo)
 
-// Traditional Promise syntax
-// getValueWithDelay("Danial", 250).then((message) => console.log(message))
-// getValueWithDelay("Дщыфцшоася", 250)
-//   .then((message) => console.log(message))
-//   .catch((e) => console.log(e))
-//   .finally(() => console.log("ывфаыфуй"))
+list.addEventListener("change", (e) => {
+  if (!e.target.matches("[data-list-item-checkbox]")) return
 
-// // Async/Await syntax
-// async function catching() {
-//   try {
-//     const returnTheResolve = await getValueWithDelay("hi", 250)
-//     console.log(returnTheResolve)
-//     const returnTheResolve2 = await getValueWithDelay("La tierra", 250)
-//     console.log(returnTheResolve2)
-//   } catch (error) {
-//     console.log(error)
-//   } finally {
-//     console.log("سلام")
-//   }
-// }
+  const todoId = e.target.closest("li").dataset.todoId
 
-// catching()
+  const todo = todos.find((todo) => todo.id === todoId)
+  todo.complete = e.target.checked
 
-async function loopiation() {
-  for (let i = 0; i <= 10; i++) {
-    try {
-      const laRespuesta = await getValueWithDelay(
-        "No es sabio alabar el día",
-        100
-      )
-      console.log(laRespuesta)
-      const laRespuesta2 = await getValueWithDelay(
-        "No es sabio alabar el día",
-        100
-      )
-      console.log(laRespuesta2)
-      const laRespuesta3 = await getValueWithDelay(
-        "No es sabio alabar el día",
-        100
-      )
-      console.log(laRespuesta3)
-      const laRespuesta4 = await getValueWithDelayError(
-        "No es sabio alabar el día",
-        100
-      )
-      console.log(laRespuesta4)
-    } catch (error) {
-      console.log(error)
-    } finally {
-      console.log(
-        "Por fin mi compañeros, hemos llegado antes de la puesta del sol"
-      )
-    }
+  saveTodos()
+})
+
+function addTask() {
+  const todoName = inputTodosElement.value
+
+  const newTodo = {
+    name: todoName,
+    complete: false,
+    id: new Date().valueOf().toString(),
   }
+
+  todos.push(newTodo)
+  renderTodo(newTodo)
+  saveTodos()
+
+  inputTodosElement.value = ""
 }
 
-loopiation()
+function renderTodo(todo) {
+  const todoName = todo.name
 
-// for (let i = 0; i <= 10; i++) {
-//   getValueWithDelay("Abrelo", 100).then((message) => {
-//     console.log(message)
-//   })
-// }
+  if (todoName.replace(/\s/g, "").length === 0) return
+
+  const templateClone = template.content.cloneNode(true)
+  const listItem = templateClone.querySelector(".list-item")
+  listItem.dataset.todoId = todo.id
+  const textElement = templateClone.querySelector("[data-list-item-text]")
+  textElement.innerHTML = todoName
+  const checkbox = templateClone.querySelector("[data-list-item-checkbox]")
+  checkbox.checked = todo.complete
+
+  list.appendChild(templateClone)
+}
+
+function saveTodos() {
+  localStorage.setItem(TODOS_STORAGE_KEY, JSON.stringify(todos))
+}
+
+function loadTodos() {
+  const todosString = localStorage.getItem(TODOS_STORAGE_KEY)
+
+  return JSON.parse(todosString) || []
+}
+
+document.addEventListener("submit", (e) => {
+  e.preventDefault()
+
+  addTask()
+})
