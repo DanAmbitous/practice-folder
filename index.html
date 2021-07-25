@@ -8,66 +8,26 @@
   <title>Document</title>
 </head>
 <body>  
-  <form id="new-todo-form">
-    <label for="todo-input">New Todo</label>
-    <input type="text" id="todo-input">
-    <button type="submit">Add Todo</button>
-  </form>
+  <div id="inputs">
+    <label for="task-title-input">New Task</label>
+    <input type="text" id="task-title-input">
+    <button id="add-task-button">Add Task</button>
+  </div>
 
-  <ul id="list">
-    
-  </ul>
+  <div>
+    <ul id="tasks">
 
-  <template id="list-item-template">
-    <li class="list-item" data-todo-id>
-      <label class="list-item-label">
-        <input type="checkbox" data-list-item-checkbox>
-        <span data-list-item-text></span>
-      </label>
-      <button data-button-delete>Delete</button>
+    </ul>
+  </div>
+
+  <template>
+    <li>
+      <li>
+        <input type="checkbox">
+        <span></span>
+      </li>
+      <button>Delete</button>
     </li>
   </template>
-
-  <style>
-    #new-todo-form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    #new-todo-form > * {
-      margin: .15rem;
-    }
-
-    #list {
-      padding: 0;
-    }
-
-    .list-item {
-      list-style: none;
-    }
-
-    .list-item-label:hover,
-    [data-list-item-checkbox]:hover {
-      cursor: pointer;
-    }
-
-    .list-item-label:hover > [data-list-item-text] {
-      color: #333;
-      text-decoration: line-through;
-    }
-
-    [data-list-item-checkbox]:checked ~ [data-list-item-text] {
-      text-decoration: line-through;
-      color: #AAA;
-    }
-
-    [data-button-delete] {
-      margin-left: .5rem;
-    }
-
-    button {
-      cursor: pointer;
-    }
-  </style>
 </body>
 </html> 
