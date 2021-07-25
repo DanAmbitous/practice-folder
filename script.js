@@ -14,7 +14,7 @@ const inputTodosElement = document.querySelector("#todo-input")
 const template = document.querySelector("#list-item-template")
 const LOCAL_STORAGE_PREFIX = "TODO_LIST"
 const TODOS_STORAGE_KEY = `${LOCAL_STORAGE_PREFIX}-todos`
-const todos = loadTodos()
+let todos = loadTodos()
 todos.forEach(renderTodo)
 
 list.addEventListener("change", (e) => {
@@ -26,6 +26,22 @@ list.addEventListener("change", (e) => {
   todo.complete = e.target.checked
 
   saveTodos()
+})
+
+list.addEventListener("click", (e) => {
+  if (!e.target.matches("[data-button-delete]")) return
+
+  const parent = e.target.closest("li")
+  const todoId = e.target.closest("li").dataset.todoId
+
+  parent.remove()
+
+  todos = todos.filter((todo) => todo.id !== todoId)
+  saveTodos()
+
+  //remove the todo from screen
+  //remove the todo from the list
+  //save the update to date todos
 })
 
 function addTask() {
