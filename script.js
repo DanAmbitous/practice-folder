@@ -1,6 +1,4 @@
 //Delete todos
-//Mark todos as complete or incomplete
-//Load todos
 
 const inputsContainerElement = document.querySelector("#inputs")
 const inputTaskElement = document.querySelector("#task-title-input")
@@ -9,8 +7,24 @@ const listElement = document.querySelector("#tasks")
 const taskTemplate = document.querySelector("#task-template")
 const LOCAL_STORAGE_PREFIX = "TODO_PROGRAM"
 const TODOS_STORAGE_KEY = `${LOCAL_STORAGE_PREFIX}-todos`
-const todos = loadTodos()
+let todos = loadTodos()
 todos.forEach(renderTodo)
+
+listElement.addEventListener("click", (e) => {
+  if (!e.target.matches("[data-delete-button]")) return
+
+  const parent = e.target.closest(".task-li")
+  const todoId = parent.dataset.todoId
+
+  parent.remove()
+
+  console.log(todos, todoId)
+
+  todos = todos.filter((task) => task.id != todoId)
+  console.log(todos)
+
+  saveTodos()
+})
 
 listElement.addEventListener("change", (e) => {
   if (!e.target.matches("[data-list-item-checkbox]")) return
