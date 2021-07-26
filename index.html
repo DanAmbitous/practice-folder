@@ -20,14 +20,32 @@
     </ul>
   </div>
 
-  <template>
-    <li>
-      <li>
-        <input type="checkbox">
-        <span></span>
-      </li>
+  <template id="task-template">
+    <li class="task-li">
+      <input type="checkbox" data-list-item-checkbox>
+      <span data-task-list></span>
       <button>Delete</button>
     </li>
   </template>
+
+  <style>
+    #add-task-button {
+      cursor: pointer;
+    }
+
+    #tasks {
+      list-style-type: none;
+      margin: 0;
+      padding: 0; 
+    }
+
+    [data-list-item-checkbox]:checked ~ [data-task-list] {
+      text-decoration: line-through;
+    }
+
+    .task-li button {
+      cursor: pointer;
+    }
+  </style>
 </body>
 </html> 
