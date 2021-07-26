@@ -8,42 +8,82 @@
   <title>Document</title>
 </head>
 <body>  
-  <div id="inputs">
-    <label for="task-title-input">New Task</label>
-    <input type="text" id="task-title-input">
-    <button id="add-task-button">Add Task</button>
+  <div class="card">
+    <div class="card-header">
+      <span>Title 1</span>
+      <button class="expand-button">Expand</button>
+    </div>
+    <div class="card-body">
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id voluptate dolorem reprehenderit nisi doloribus? Dolor officiis praesentium aperiam dolorem sequi obcaecati iste corporis voluptatum accusamus.
+    </div>
   </div>
-
-  <div>
-    <ul id="tasks">
-
-    </ul>
+  <div class="card">
+    <div class="card-header">
+      <span>Title 2</span>
+      <button class="expand-button">Collapse</button>
+    </div>
+    <div class="card-body show">
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id voluptate dolorem reprehenderit nisi doloribus? Dolor officiis praesentium aperiam dolorem sequi obcaecati iste corporis voluptatum accusamus.
+    </div>
   </div>
-
-  <template id="task-template">
-    <li class="task-li">
-      <input type="checkbox" data-list-item-checkbox>
-      <span data-task-list></span>
-      <button data-delete-button>Delete</button>
-    </li>
-  </template>
+  <div class="card">
+    <div class="card-header">
+      <span>Title 3</span>
+      <button class="expand-button">Expand</button>
+    </div>
+    <div class="card-body">
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id voluptate dolorem reprehenderit nisi doloribus? Dolor officiis praesentium aperiam dolorem sequi obcaecati iste corporis voluptatum accusamus.
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <span>Title 4</span>
+      <button class="expand-button">Expand</button>
+    </div>
+    <div class="card-body">
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id voluptate dolorem reprehenderit nisi doloribus? Dolor officiis praesentium aperiam dolorem sequi obcaecati iste corporis voluptatum accusamus.
+    </div>
+  </div>
 
   <style>
-    #add-task-button {
-      cursor: pointer;
-    }
-
-    #tasks {
-      list-style-type: none;
+    body {
+      background-color: #DCDCDC;
+      padding: 1rem;
       margin: 0;
-      padding: 0; 
     }
 
-    [data-list-item-checkbox]:checked ~ [data-task-list] {
-      text-decoration: line-through;
+    .card {
+      border: 1px solid black;
+      margin-bottom: 1rem;
+      background-color: white;
     }
 
-    .task-li button {
+    .card:last-child {
+      margin-bottom: 0;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid black;
+      padding: .5rem;
+      font-size: 2rem;
+      align-items: center;
+      margin-bottom: -1px;
+    }
+
+    .card-body {
+      padding: 0 .5rem;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .card-body.show {
+      height: auto;
+      padding: .5rem;
+    }
+
+    button {
       cursor: pointer;
     }
   </style>
