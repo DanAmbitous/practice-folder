@@ -1,0 +1,23 @@
+{
+  "name": "practice-folder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanAmbitous/practice-folder.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DanAmbitous/practice-folder/issues"
+  },
+  "homepage": "https://github.com/DanAmbitous/practice-folder#readme",
+  "dependencies": {
+    "uuid": "^8.3.2"
+  }
+}
