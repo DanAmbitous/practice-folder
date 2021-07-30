@@ -4,6 +4,12 @@ import {
   fromUnixTime,
   addMonths,
   subMonths,
+  startOfWeek,
+  startOfMonth,
+  endOfWeek,
+  endOfMonth,
+  eachDayOfInterval,
+  isSameMonth,
 } from "date-fns"
 
 const calenderTogglerButton = document.querySelector(".date-picker-button")
@@ -11,6 +17,7 @@ const calenderElement = document.querySelector(".date-picker")
 const calenderDateHeader = document.querySelector(".current-month")
 const nextMonthButton = document.querySelector(".next-month-button")
 const previousMonthButton = document.querySelector(".prev-month-button")
+const dateGrid = document.querySelector(".date-picker-grid-dates")
 let currentDate = new Date()
 
 calenderTogglerButton.addEventListener("click", () => {
@@ -21,8 +28,31 @@ calenderTogglerButton.addEventListener("click", () => {
   setupDatePicker(selectedDate)
 })
 
-function setupDatePicker() {
+function setupDatePicker(selectedDate) {
   calenderDateHeader.textContent = format(currentDate, "MMMM - Y")
+  setupDates(selectedDate)
+}
+
+function setupDates(selectedDate) {
+  const firstDayOfTheWeek = startOfWeek(startOfMonth(selectedDate))
+  const lastDayOfTheMonth = endOfWeek(endOfMonth(selectedDate))
+
+  const dates = eachDayOfInterval({
+    start: firstDayOfTheWeek,
+    end: lastDayOfTheMonth,
+  })
+
+  dateGrid.innerHTML = ""
+
+  dates.forEach((date) => {
+    const dateElement = document.createElement("button")
+    dateElement.classList.add("date")
+    dateElement.textContent = date.getDate()
+    if (!isSameMonth(date, currentDate)) {
+      dateElement.classList.add("date-picker-other-month-date")
+    }
+    dateGrid.append(dateElement)
+  })
 }
 
 nextMonthButton.addEventListener("click", () => {
