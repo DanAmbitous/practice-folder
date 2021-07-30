@@ -11,11 +11,11 @@
 </head>
 <body>
   <div class="date-picker-container">
-    <button class="date-picker-button"></button>
-    <div class="date-picker">
+    <button class="date-picker-button">October 26th, 2020</button>
+    <div class="date-picker show">
       <div class="date-picker-header">
         <button class="prev-month-button month-button">&larr;</button>
-        <div class="current-month"></div>
+        <div class="current-month">October - 2020</div>
         <button class="next-month-button month-button">&rarr;</button>
       </div>
       <div class="date-picker-grid-header date-picker-grid">
@@ -68,15 +68,6 @@
   </div>
 
   <style>
-    .date-picker.show {
-      display: block;
-    }
-
-    .date.selected {
-      background-color: hsl(200, 100%, 50%);
-      color: white;
-    }
-
     body {
       margin: 0;
       margin-top: 1rem;
@@ -147,6 +138,7 @@
       cursor: pointer;
       border-radius: .25rem;
       border: none;
+      background: none;
     }
 
     .date-picker-grid-dates > *:hover {
@@ -163,6 +155,19 @@
     .month-button:hover {
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
       border-radius: .5rem;
+    }
+
+    .date-picker.show {
+        display: block;
+      }
+
+    .date.selected {
+      background-color: hsl(200, 100%, 50%);
+      color: white;
+    }
+
+    body {
+      background-color: moccasin;
     }
   </style>
 </body>
