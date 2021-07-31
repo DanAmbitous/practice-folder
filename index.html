@@ -12,7 +12,7 @@
 <body>
   <div class="date-picker-container">
     <button class="date-picker-button"></button>
-    <div class="date-picker">
+    <div class="date-picker show">
       <div class="date-picker-header">
         <button class="prev-month-button month-button">&larr;</button>
         <div class="current-month"></div>
@@ -28,7 +28,7 @@
         <div>Sat</div>
       </div>
       <div class="date-picker-grid-dates date-picker-grid">
-        <!-- <button class="date date-picker-other-month-date">27</button>
+        <button class="date date-picker-other-month-date">27</button>
         <button class="date date-picker-other-month-date">28</button>
         <button class="date date-picker-other-month-date">29</button>
         <button class="date date-picker-other-month-date">30</button>
@@ -57,109 +57,105 @@
         <button class="date">23</button>
         <button class="date">24</button>
         <button class="date">25</button>
-        <button class="date selected">26</button>
-        <button class="date">27</button>
+        <button class="date">26</button>
+        <button class="date selected">27</button>
         <button class="date">28</button>
         <button class="date">29</button>
         <button class="date">30</button>
-        <button class="date">31</button> -->
+        <button class="date">31</button>
       </div>
     </div>
   </div>
 
   <style>
     body {
-      margin: 0;
-      margin-top: 1rem;
-      display: flex;
-      justify-content: center;
-    }
+  margin: 0;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
 
-    .date-picker-container {
-      position: relative;
-      display: inline-block;
-    }
+.date-picker-container {
+  position: relative;
+  display: inline-block;
+}
 
-    .date-picker-button {
-      cursor: pointer;
-    }
+.date-picker-button {
+  cursor: pointer;
+}
 
-    .date-picker {
-      display: none;
-      position: absolute;
-      margin-top: 1rem;
-      top: 100%;
-      transform: translateX(-50%);
-      left: 50%;
-      padding: .5rem;
-      border-radius: .5rem;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06), 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-      background-color: white;
-    }
+.date-picker {
+  display: none;
+  position: absolute;
+  margin-top: 1rem;
+  top: 100%;
+  transform: translateX(-50%);
+  left: 50%;
+  padding: .5rem;
+  border-radius: .5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06), 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  background-color: white;
+}
 
-    .date-picker-header {
-      display: flex;
-      justify-content: space-between;
-      font-weight: bold;
-      font-size: .8rem;
-      align-items: center;
-    }
+.date-picker-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: .8rem;
+  align-items: center;
+}
 
-    .date-picker-grid {
-      display: grid;
-      gap: .5rem;
-      grid-template-columns: repeat(7, 2rem);
-      grid-auto-rows: 2rem;
-    }
+.date-picker-grid {
+  display: grid;
+  gap: .5rem;
+  grid-template-columns: repeat(7, 2rem);
+  grid-auto-rows: 2rem;
+}
 
-    .date-picker-grid > * {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 100%;
-    }
+.date-picker-grid > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
 
-    .date-picker-grid-header {
-      font-weight: bold;
-      font-size: .75rem;
-      color: #333;
-    }
+.date-picker-grid-header {
+  font-weight: bold;
+  font-size: .75rem;
+  color: #333;
+}
 
-    .date-picker-grid-dates {
-      color: #555;
-    }
+.date-picker-grid-dates {
+  color: #555;
+}
 
-    .date-picker-other-month-date {
-      color: #AAA;
-    }
+.date-picker-other-month-date {
+  color: #AAA;
+}
 
-    .date-picker-grid-dates > .date {
-      cursor: pointer;
-      border-radius: .25rem;
-      border: none;
-      background: none;
-    }
+.date-picker-grid-dates > .date {
+  cursor: pointer;
+  border-radius: .25rem;
+  border: none;
+  background: none;
+}
 
-    .date-picker-grid-dates > *:hover {
-      background-color: hsl(200, 100%, 80%);
-      color: black;
-    }
+.date-picker-grid-dates > *:hover {
+  background-color: hsl(200, 100%, 80%);
+  color: black;
+}
 
-    .month-button {
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
+.month-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 
-    .month-button:hover {
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-      border-radius: .5rem;
-    }
-
-    .date-picker.show {
-        display: block;
-      }
+.month-button:hover {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  border-radius: .5rem;
+}
 
     .date.selected {
       background-color: hsl(200, 100%, 50%);
@@ -168,6 +164,15 @@
 
     body {
       background-color: moccasin;
+    }
+
+    .date-picker.show {
+      display: block;
+    }
+
+    .date.selected {
+      background-color: hsl(200, 100%, 50%);
+      color: white;
     }
   </style>
 </body>
