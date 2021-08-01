@@ -6,57 +6,38 @@ import {
   subMonths,
 } from "date-fns"
 
-const calenderTogglerButton = document.querySelector(".date-picker-button")
+const calenderButton = document.querySelector(".date-picker-button")
 const calenderElement = document.querySelector(".date-picker")
-const calenderTextHeader = document.querySelector(".current-month")
-const nextMonthButton = document.querySelector(".next-month-button")
-const previousMonthButton = document.querySelector(".prev-month-button")
+const calenderHeaderText = document.querySelector(".current-month")
+const nextCalenderButton = document.querySelector(".next-month-button")
+const previousCalenderButton = document.querySelector(".prev-month-button")
 let currentDate = new Date()
 
-function setDates(date) {
-  calenderTogglerButton.textContent = format(date, "MMMM do, Y")
-  calenderTextHeader.textContent = format(date, "MMMM - Y")
+calenderButton.addEventListener("click", () => {
+  calenderElement.classList.toggle("show")
+  const selectedDate = fromUnixTime(calenderButton.dataset.selectedData)
+
+  setupDatePicker(selectedDate)
+})
+
+function setupDatePicker(date) {
+  calenderHeaderText.innerText = format(date, "MMMM - Y")
 }
 
-calenderTogglerButton.addEventListener("click", () => {
-  calenderElement.classList.toggle("show")
-})
+function setDate(date) {
+  calenderButton.textContent = format(date, "MMMM do, Y")
+  calenderHeaderText.textContent = format(date, "MMMM - Y")
+  calenderButton.dataset.selectedData = getUnixTime(date)
+}
 
-nextMonthButton.addEventListener("click", () => {
+setDate(new Date())
+
+nextCalenderButton.addEventListener("click", () => {
   currentDate = addMonths(currentDate, 1)
-
-  calenderTextHeader.textContent = format(currentDate, "MMMM - Y")
+  setupDatePicker(currentDate)
 })
 
-previousMonthButton.addEventListener("click", () => {
+previousCalenderButton.addEventListener("click", () => {
   currentDate = subMonths(currentDate, 1)
-
-  calenderTextHeader.textContent = format(currentDate, "MMMM - Y")
+  setupDatePicker(currentDate)
 })
-
-setDates(currentDate)
-
-// function dateAssigner() {
-//   calenderTogglerButton.textContent = format(currentDate, "MMMM do, Y")
-
-//   calenderTogglerButton.dataset.selectedDate = getUnixTime(currentDate)
-
-//   const selectedDate = fromUnixTime(calenderTogglerButton.dataset.selectedDate)
-
-//   setupDatePicker(selectedDate)
-// }
-
-// function setDate(date) {
-//   calenderTogglerButton.textContent = format(date, "MMMM do, Y")
-//   calenderTextHeader.textContent = format(currentDate, "MMMM - Y")
-
-//   const selectedDate = fromUnixTime(calenderTogglerButton.dataset.selectedDate)
-
-//   setupDatePicker(selectedDate)
-// }
-
-// setDate(currentDate)
-
-// function setupDatePicker(selectedDate) {
-//   console.log(selectedDate)
-// }
